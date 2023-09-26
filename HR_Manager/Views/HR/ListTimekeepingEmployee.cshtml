@@ -1,0 +1,132 @@
+﻿@model IEnumerable<HR_Manager.Models.ChamCong>
+
+@{
+    ViewBag.Title = "ListTimekeepingEmployee";
+    Layout = "~/Views/HR/Layout_HR/Layout_HR.cshtml";
+}
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h3 class="box-title">List Timekeeping</h3>
+                        <div class="box-tools">
+                            @using (Html.BeginForm("ListTimekeepingEmployee", "HR", FormMethod.Get, new { @id = "timekeepingList" }))
+                            {
+                                <div class="drop-filter">
+                                    @Html.DropDownList("MaNV", null, "-- Select --", new { @class = "form-control", id = "formDropdown", style = "border-radius:8px" })
+                                </div>
+
+                                <div class="drop-filter">
+                                    @Html.DropDownList("month", (IEnumerable<SelectListItem>)ViewBag.month, new { @class = "form-control", id = "formDropdown", style = "border-radius:8px" })
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding" id="list_TK">
+                        <table class="table table-hover">
+                            <tr>
+                                <th>@Html.DisplayName("MaNV")</th>
+                                <th>@Html.DisplayName("MaPL")</th>
+                                <th>@Html.DisplayName("ThoiGianVaoLam")</th>
+                                <th>@Html.DisplayName("ThoiGianKetThucLV")</th>
+                                <th>@Html.DisplayName("SoGioLamViec")</th>
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MaNV)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MaPL)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ThoiGianVaoLam)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ThoiGianKetThucLV)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SoGioLamViec)
+                                    </td>
+
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script type="text/javascript">
+    $(".content-wrapper").on("change", "#formDropdown", function () {
+        $('#timekeepingList')[0].submit();
+    });
+    $(".content-wrapper").on("click", ".Grid tfoot a", function () {
+        $('#timekeepingList').attr('action', $(this).attr('href')).submit();
+        return false;
+    });
+
+    @*$(document).ready(function () {
+        var list = document.getElementById("list_TK");
+        setInterval(function () {
+            $.ajax({
+                url: '@Url.Action("ListTimekeepingEmployee", "HR")',
+                type: 'GET',
+                dataType: 'html',
+                success: function (list) {
+                    location.reload();
+                }
+            });
+        }, 3000); // Refresh every 5 seconds
+    });*@
+
+    //function checkForNewRecords() {
+    //    $.ajax({
+    //        url: '/HR/ListTimekeepingEmployee',
+    //        type: 'GET',
+    //        success: function (newData) {
+    //            if (newData == true) {
+    //                location.reload();
+    //            }
+    //        },
+    //    });
+    //}
+
+    setInterval(checkForNewRecords, 3000)
+
+    //$(document).ready(function () {
+    //    setInterval(function () {
+    //        $.ajax({
+    //            url: '/HR/ListTimekeepingEmployee',
+    //            type: 'GET',
+    //            dataType: 'html',
+    //            success: function (data) {
+    //                if (data.indexOf('newdata') !== -1) {
+    //                    location.reload();
+    //                }
+    //            }
+    //        });
+    //    }, 3000)
+    //})
+
+    // Set an interval function to run every 15 seconds
+    //setInterval(function () {
+    //    // Make an AJAX POST request to the server
+    //    $.ajax({
+    //        url: '/HR/ListTimekeepingEmployee', // The target URL
+    //        type: 'GET', // The HTTP method
+    //        success: function (data) {
+    //            if (data.newData) {
+    //                location.reload();
+    //            }
+    //        }
+    //    });
+    //}, 3000);
+</script>

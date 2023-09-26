@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="926a456dcd5f4f61a5d262177bce2741" Name="Diagram1" ZoomLevel="101">
+        <EntityTypeShape EntityType="HRManagerModel1.ChamCong" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRManagerModel1.ChucVu" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRManagerModel1.HopDongLaoDong" Width="1.5" PointX="8.25" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRManagerModel1.LoaiHopDong" Width="1.5" PointX="6" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRManagerModel1.LoaiKLKT" Width="1.5" PointX="6" PointY="28.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRManagerModel1.LoaiNghiPhep" Width="1.5" PointX="3" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRManagerModel1.NhanVien" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRManagerModel1.PhieuCongTac" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRManagerModel1.PhieuDieuChuyen" Width="1.5" PointX="8.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRManagerModel1.PhieuKLKT" Width="1.5" PointX="8.25" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRManagerModel1.PhieuLuong" Width="1.5" PointX="5.25" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRManagerModel1.PhieuNghiPhep" Width="1.5" PointX="5.25" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRManagerModel1.PhongBan" Width="1.5" PointX="0.75" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRManagerModel1.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRManagerModel1.TaiKhoan" Width="1.5" PointX="5.25" PointY="32.125" IsExpanded="true" />
+        <AssociationConnector Association="HRManagerModel1.MaNV_CC_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="HRManagerModel1.MaCV_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="HRManagerModel1.MaLoaiHD_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="HRManagerModel1.MaNV_HDLD_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="HRManagerModel1.MaKLKT_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="HRManagerModel1.MaLoaiNP_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="HRManagerModel1.MaNV_PCT_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="HRManagerModel1.MaNV_PDC_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="HRManagerModel1.MaNV_PKLKT_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="HRManagerModel1.MaNV_PL_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="HRManagerModel1.MaNV_PNP_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="HRManagerModel1.MaNV_TK_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="HRManagerModel1.MaPB_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="HRManagerModel1.MaPB_PDC_FK" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HRManagerModel1.BacLuong" Width="1.5" PointX="3" PointY="7.375" />
+        <AssociationConnector Association="HRManagerModel1.MaCV_BL_FK" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

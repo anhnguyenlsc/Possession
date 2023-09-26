@@ -1,0 +1,512 @@
+﻿@using HR_Manager.Models
+@model IEnumerable<LoaiNghiPhep>
+
+@{
+    Layout = null;
+    var user = (TaiKhoan)HttpContext.Current.Session["user"];
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <title>Employee</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="~/assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="~/assets/css/templatemo-style.css" />
+
+</head>
+
+<body onload="showNotification()">
+    <div id="page-wraper">
+        <!-- Sidebar Menu -->
+        <div class="responsive-nav">
+            <i class="fa fa-bars" id="menu-toggle"></i>
+            <div id="menu" class="menu">
+                <i class="fa fa-times" id="menu-close"></i>
+                <div class="container">
+                    <div class="image">
+                        <a href="#">
+                            <!--Dữ liệu đang được set mặc định để tiện chỉnh sửa,
+                                nếu muốn view hiển thị dữ liệu dưới db, thay thế vào dòng này
+                                @*@user.NhanVien.AnhDaiDienNV*@
+                                -->
+                            <img src="@user.NhanVien.AnhDaiDienNV" />
+                        </a>
+                    </div>
+                    <div class="author-content">
+                        @*@user.NhanVien.HoTen*@
+                        <h4>@user.NhanVien.HoTen</h4>
+
+                        @*@user.NhanVien.ChucVu.TenCV*@
+                        <span>@user.NhanVien.ChucVu.TenCV</span>
+
+                        <br />
+                        @*@user.NhanVien.PhongBan.TenPB*@
+                        <span>@user.NhanVien.PhongBan.TenPB</span>
+                    </div>
+                    <nav class="main-nav" role="navigation">
+                        <ul class="main-menu">
+                            <li><a href="#section1">Timekeeping</a></li>
+                            <li><a href="#section2">Notification</a></li>
+                            <li><a href="#section3">Application for leave</a></li>
+                        </ul>
+                        <br />
+                        @*<a href="@Url.Action()" style="color:white"><i><u>Employee personal information</u></i></a>*@
+                        <a href="@Url.Action("EmployeePersonalInfo","Staff", new { id = user.MaNV })" style="color:white"><i><u>Employee personal information</u></i></a>
+
+                    </nav>
+                    <div class="social-network">
+                        <ul class="soial-icons">
+                            <li>
+                                <a href="https://fb.com/templatemo">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-dribbble"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-rss"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="copyright-text">
+                        <p>Copyright 2023 &copy; Possession Team</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="section timekeeping" data-section="section1" id="section1">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>T i m e k e e p i n g</h2>
+                    <div class="line-dec"></div>
+                </div>
+                <div class="left-image-post">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="left-image">
+                                <img src="~/assets/images/left-image.jpg" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="right-text">
+                                <h3>Interests & Responsibilities</h3>
+                                <p>
+                                    Each employees both have to work in the best performance. Besides, the value will be got is the same. <br />
+                                    To save your rights, please "Check in" when start to work, and "Check out" when your day finished.
+                                </p>
+
+                                <form id="timekeeping" action="~/Staff/ST_TimekeepingCheckIn" method="post" style="display:inline-block;">
+                                    <button id="btn-checkin" type="submit" class="button-check-in" data-toggle="modal" data-target="#checkinModal">
+                                        Check In
+                                        <i class="fa fa-sign-in" style="font-size:20px; margin-left:5px"></i>
+                                    </button>
+
+                                    <!-- Check In Modal -->
+                                    <div class="modal fade" id="checkinModal">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <!-- Modal Header -->
+                                                <div class="modal-header-pic">
+                                                    <img class="modal-title-pic" src="~/Images/System/success.gif" />
+                                                </div>
+                                                <!-- Modal body -->
+                                                <div class="modal-body-text">
+                                                    <h2>Check in success</h2>
+                                                </div>
+                                                <div>
+                                                    @*@user.MaNV*@
+                                                    <input type="hidden" name="MaNV" value="@user.MaNV" />
+                                                    @{TempData["MaCC"] = ViewBag.macc;}
+
+                                                </div>
+                                                <!-- Modal footer -->
+                                                <div class="modal-footer" style="border:none">
+                                                    <a href="" class="btn btn-danger">Close</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                                <form id="timekeeping" action="~/Staff/ST_TimekeepingCheckOut" method="post" style="display:inline-block; float:right">
+                                    <button id="btn-checkout" class="button-check-out" type="submit" data-toggle="modal" data-target="#checkoutModal">
+                                        Check Out
+                                        <i class="fa fa-sign-out" style="font-size:20px; margin-left:2px"></i>
+                                    </button>
+                                    <!-- Check Out Modal -->
+                                    <div class="modal fade" id="checkoutModal">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <!-- Modal Header -->
+                                                <div class="modal-header-pic">
+                                                    <img class="modal-title-pic" src="~/Images/System/success.gif" />
+                                                </div>
+
+                                                <div class="modal-body-text">
+                                                    <h3>Check out success</h3>
+                                                </div>
+
+                                                <div>
+                                                    @*@user.MaNV*@
+                                                    <input type="hidden" name="MaNV" value="@user.MaNV" />
+                                                </div>
+                                                <!-- Modal footer -->
+                                                <div class="modal-footer" style="border:none">
+                                                    <a href="" class="btn btn-danger">Close</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section notification" data-section="section2" id="section2">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>N o t i f i c a t i o n</h2>
+                    <div class="line-dec"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="service-item">
+                            <div class="third-service-icon service-icon"></div>
+                            @{
+                                    HRManagerEntities5 db = new HRManagerEntities5();
+                                    var findNVDC = db.PhieuDieuChuyens.FirstOrDefault(nvdc => nvdc.MaNV == user.MaNV);
+
+                                    if (findNVDC == null)
+                                    {
+                                        @Html.Raw("");
+                                    }
+                                    else if (findNVDC != null)
+                                    {
+                                    <a class="fa fa-info-circle btn-noBG" href="~/Staff/ExportPDFTransfering">
+                                    </a>
+                                }
+                            }
+                            <h4>Transfer</h4>
+                            <p>
+                                @{
+                                    var nv = user.MaNV;
+                                    var findMaNV = db.PhieuDieuChuyens.FirstOrDefault(manv => manv.MaNV == nv);
+
+                                    if (findMaNV == null)
+                                    {
+                                        @Html.Raw("There are no notification for you")
+                                    }
+                                    else if (findMaNV != null)
+                                    {
+                                        @Html.Raw("Transfered to " + findMaNV.MaPB + " department")
+                                    }
+                                }
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="service-item">
+                            <div class="fourth-service-icon service-icon"></div>
+                            @{
+                                var findCT = db.PhieuCongTacs.FirstOrDefault(nvdc => nvdc.MaNV == user.MaNV);
+
+                                if (findCT == null)
+                                {
+                                    @Html.Raw("");
+                                }
+                                else if (findCT != null)
+                                {
+                                    <a class="fa fa-info-circle btn-noBG" href="~/Staff/ExportPDFBusiness">
+                                    </a>
+                                }
+                            }                            
+                            <h4>Business trip</h4>
+                            <p>
+                                @{
+                                    var findMaNVCT = db.PhieuCongTacs.FirstOrDefault(manv => manv.MaNV == nv);
+
+                                    if (findMaNVCT == null)
+                                    {
+                                        @Html.Raw("There are no notification for you")
+
+                                    }
+                                    else if (findMaNVCT != null)
+                                    {
+                                        ViewBag.getNDCT = findMaNVCT.NoiDungCongTac;
+                                        ViewBag.getNCT = findMaNVCT.NoiCT;
+                                        @Html.Raw(ViewBag.getNDCT + " at " + ViewBag.getNCT)
+                                    }
+                                }
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section application-for-leave" data-section="section3" id="section3">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>A p p l i c a t i o n f o r l e a v e</h2>
+                    <div class="line-dec"></div>
+                    <h3 id="addNoti" style="color:antiquewhite">@TempData["NotiAdd"]</h3>
+                </div>
+                <div class="row">
+                    <div class="right-content">
+                        <div class="container">
+                            <form id="contact" action="~/Staff/ST_Homepage" method="post" enctype="multipart/form-data">
+                                <div class="row">
+                                    <!--Leave start date-->
+                                    <div class="col-md-6">
+                                        <fieldset>
+                                            <p style="text-align:left; font-size:20px">Leave start date</p>
+                                            <input name="ngaybdnghi"
+                                                   type="date"
+                                                   class="form-control"
+                                                   id="fromDate"
+                                                   required="" />
+                                        </fieldset>
+                                    </div>
+
+                                    <!--Leave end date-->
+                                    <div class="col-md-6">
+                                        <fieldset>
+                                            <p style="text-align: left; font-size: 20px">Leave end date</p>
+                                            <input name="ngaydilam"
+                                                   type="date"
+                                                   class="form-control"
+                                                   id="endDate"
+                                                   required="" />
+                                        </fieldset>
+                                    </div>
+
+                                    <!--TenLoaiNP-->
+                                    <div class="col-md-6">
+                                        <fieldset>
+                                            @Html.DropDownList("MaLoaiNP", null, htmlAttributes: new { })
+                                            @*<select id="MaLoaiNP" name="MaLoaiNP">
+                                                <option value="NP_NO" style="color:black">Nghỉ ốm</option>
+                                                <option value="NP_TN" style="color:black">Nghỉ do tai nạn</option>
+                                                <option value="NP_TS" style="color:black">Nghỉ thai sản</option>
+                                            </select>*@
+                                        </fieldset>
+                                    </div>
+
+                                    <!--Upload Image-->
+                                    <div class="col-md-6">
+                                        <fieldset>
+                                            <label class="upload-img" style="margin-bottom:-0.5rem;margin-right:200px">Upload Image</label>
+                                            <input name="ImageUploadPNP" class="custom-file-input" type="file" accept="image/*" style="width:10%;padding-left:0px;padding-right:20px" />
+                                            <i class="fa fa-upload" style="font-size:26px"></i>
+                                        </fieldset>
+                                    </div>
+
+                                    <!--Description-->
+                                    <div class="col-md-12">
+                                        <fieldset>
+                                            <textarea name="noidungnp"
+                                                      rows="6"
+                                                      class="form-control"
+                                                      id="noidung"
+                                                      placeholder="Description..."
+                                                      required=""></textarea>
+                                        </fieldset>
+                                    </div>
+
+                                    <div>
+                                        @*@user.MaNV*@
+                                        <input type="hidden" name="MaNV" value="@user.MaNV" />
+                                    </div>
+                                    <!--Button Submit-->
+                                    <div class="col-md-12">
+                                        <fieldset>
+                                            <button type="submit" id="form-submit" class="button" @*data-toggle="modal" data-target="#applicationModal"*@>
+                                                @*<a href="#my-dialog">Submit</a>*@
+                                                Submit
+                                            </button>
+
+                                            <!-- Application Modal -->
+                                            <!--<div class="dialog overlay" id="my-dialog">
+        <a href="#" class="overlay-close"></a>
+
+        <div class="dialog-body">
+            <a class="dialog-close-btn" href="#">&times;</a>
+            <h3 id="modalalertbody">@*@ViewBag.NotiAdd*@</h3>
+        </div>
+    </div>-->
+                                            @*<div class="modal fade" id="applicationModal" role="dialog">
+            <div class="modal-dialog">
+                    <div class="modal-content">
+                        Modal Header
+                        <div class="modal-header-pic">
+                            <img class="modal-title-pic" src="@ViewBag.ImageNoti" />
+                        </div>
+
+                        Modal body
+                        <div id="modalalertbody" class="modal-body-text" style="font-size:medium">
+                            <h3 id="modaltext">@TempData["NotiAdd"]</h3>
+                        </div>
+
+                        Modal footer
+                        <div class="modal-footer" style="border:none" data-dismiss="true">
+                            <button class="btn btn-danger">Close</button>
+                        </div>
+                    </div>
+            </div>
+        </div>*@
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>
+
+    <script>
+        //according to loftblog tut
+        $(".main-menu li:first").addClass("active");
+        var showSection = function showSection(section, isAnimate) {
+            var direction = section.replace(/#/, ""),
+                reqSection = $(".section").filter(
+                    '[data-section="' + direction + '"]'
+                ),
+                reqSectionPos = reqSection.offset().top - 0;
+
+            if (isAnimate) {
+                $("body, html").animate(
+                    {
+                        scrollTop: reqSectionPos
+                    },
+                    800
+                );
+            } else {
+                $("body, html").scrollTop(reqSectionPos);
+            }
+        };
+
+        var checkSection = function checkSection() {
+            $(".section").each(function () {
+                var $this = $(this),
+                    topEdge = $this.offset().top - 80,
+                    bottomEdge = topEdge + $this.height(),
+                    wScroll = $(window).scrollTop();
+                if (topEdge < wScroll && bottomEdge > wScroll) {
+                    var currentId = $this.data("section"),
+                        reqLink = $("a").filter("[href*=\\#" + currentId + "]");
+                    reqLink
+                        .closest("li")
+                        .addClass("active")
+                        .siblings()
+                        .removeClass("active");
+                }
+            });
+        };
+
+        //function showNotification() {
+        //    var notification = document.getElementById("addNoti");
+        //    setTimeout(notification.hidden, 10);
+        //}
+
+        function showNotification() {
+			//var notification = new Notification("@*TempData["NotiAdd"]*@");
+            setTimeout(function () {
+                document.getElementById("addNoti").style.display = "none";
+            }, 10000);
+        }
+
+        //function openModal(strMessage) {
+        //    var myDiv = document.getElementById("modalalertbody");
+        //    myDiv.innerHTML = strMessage;
+        //    $('#my-dialog').show();
+        //}
+
+        @*$(document).ready(function () {
+            var msg = "@ViewBag.NotiAdd";
+            if (msg != null) {
+                var notiAdd = '@ViewBag.NotiAdd';
+                $('#modalalertbody').text(notiAdd);
+
+                $('#form-submit').click(function () {
+                    var notiAdd = '@ViewBag.NotiAdd';
+                    $('#modalalertbody').text(notiAdd);
+                    location.reload();
+                    $('#my-dialog').show();
+                });
+            }
+        });*@
+
+
+
+        //Delay dialog
+        //setTimeout(function () {
+        //    $('#applicationModal').modal('show');
+        //}, 5000);
+
+        //$(".main-menu").on("click", function (e) {
+        //    e.preventDefault();
+        //    showSection($(this).attr("href"), true);
+        //});
+
+        $(window).scroll(function () {
+            checkSection();
+        });
+
+        //leave start date
+        let currentDate = new Date().toISOString().split("T")[0];
+        document.getElementById("fromDate").min = currentDate;
+
+        //leave end date
+        const dateStart = document.querySelector('#fromDate');
+        const dateEnd = document.querySelector('#endDate');
+        dateStart.addEventListener('change', () => {
+            const minDate = new Date(dateStart.value);
+            minDate.setDate(minDate.getDate() + 1);
+            dateEnd.min = minDate.toISOString().slice(0, 10);
+            dateEnd.value = dateEnd.min;
+        });
+
+    </script>
+</body>
+</html>
+

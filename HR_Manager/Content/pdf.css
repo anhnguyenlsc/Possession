@@ -1,0 +1,15 @@
+﻿body {
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.container-decide {
+    width: 900px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.container-decide table {
+    border-style: none;
+    border-width:0;
+    width: 100.0%;
+}
